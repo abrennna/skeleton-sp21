@@ -2,7 +2,7 @@ package deque;
 
 import java.util.Iterator;
 
-public class LinkedListDeque<T> implements Deque<T> {
+public class LinkedListDeque<T> extends AbstractDeque<T> {
 
     public static class LinkedListNode<T> {
         // class variables of the LinkedListNode class
@@ -117,55 +117,60 @@ public class LinkedListDeque<T> implements Deque<T> {
     }
 
     public class LinkedListDequeIterator implements Iterator<T> {
-        private int wizPos;
+        // private int wizPos;
+        LinkedListNode<T> curr;
         private LinkedListDequeIterator() {
-            wizPos = 0;
+            // wizPos = 0;
+            curr = sentinel.next;
         }
 
         @Override
         public boolean hasNext() {
-            LinkedListNode<T> curr = sentinel.next;
-            if (curr != sentinel) {
-                wizPos += 1;
-                curr = curr.next;
-                return true;
-            }
-            return false;
+            // LinkedListNode<T> curr = sentinel.next;
+            return curr != sentinel;
+//            if (curr != sentinel) {
+//                // wizPos += 1;
+//                // curr = curr.next;
+//                return true;
+//            }
+//            return false;
         }
 
         @Override
         public T next() {
-            LinkedListNode<T> curr = sentinel;
-            for (int i = 0; i <= wizPos; i += 1) {
-                curr = curr.next;
-            }
-            return curr.item;
+            //LinkedListNode<T> curr = sentinel;
+//            for (int i = 0; i <= wizPos; i += 1) {
+//                curr = curr.next;
+//            }
+            T itemReturn = curr.item;
+            curr = curr.next;
+            return itemReturn;
         }
     }
 
-    /** Returns whether or not the parameter o is equal to the Deque.
-     * o is considered equal if it is a Deque and if it contains the same contents
-     * (as goverened by the generic T’s equals method) in the same order.
-     * (ADDED 2/12: You’ll need to use the instance of keywords for this.
-     * Read here for more information) */
-    public boolean equals(Object o) {
-        if (o == null) {
-            return false;
-        }
-        if (!(o instanceof Deque)) {
-            return false;
-        }
-        LinkedListDeque<T> oDeque = (LinkedListDeque<T>) o;
-        if (this.size != oDeque.size) {
-            return false;
-        }
-        Iterator<T> LLDequeSeer = this.iterator();
-        Iterator<T> oSeer = oDeque.iterator();
-        while (LLDequeSeer.hasNext()) {
-            if (!LLDequeSeer.next().equals(oSeer.next())) {
-                return false;
-            }
-        }
-        return true;
-    }
+//    /** Returns whether or not the parameter o is equal to the Deque.
+//     * o is considered equal if it is a Deque and if it contains the same contents
+//     * (as goverened by the generic T’s equals method) in the same order.
+//     * (ADDED 2/12: You’ll need to use the instance of keywords for this.
+//     * Read here for more information) */
+//    public boolean equals(Object o) {
+//        if (o == null) {
+//            return false;
+//        }
+//        if (!(o instanceof Deque)) {
+//            return false;
+//        }
+//        LinkedListDeque<T> oDeque = (LinkedListDeque<T>) o;
+//        if (this.size != oDeque.size) {
+//            return false;
+//        }
+//        Iterator<T> LLDequeSeer = this.iterator();
+//        Iterator<T> oSeer = oDeque.iterator();
+//        while (LLDequeSeer.hasNext()) {
+//            if (!LLDequeSeer.next().equals(oSeer.next())) {
+//                return false;
+//            }
+//        }
+//        return true;
+//    }
 }

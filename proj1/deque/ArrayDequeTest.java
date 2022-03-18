@@ -204,8 +204,11 @@ public class ArrayDequeTest {
 //            System.out.println(ref);
 //            myLLDeque.printDeque();
 //            myADeque.printDeque();
-            System.out.println("My LinkedListDeque compared to the reference deque: " + ref.equals(myLLDeque));
-            System.out.println("My ArrayDeque compared to the reference deque: " + ref.equals(myADeque));
+//            System.out.println("My LinkedListDeque compared to the reference deque: " + myLLDeque.equals(ref));
+//            System.out.println("My ArrayDeque compared to the reference deque: " + myADeque.equals(ref));
+
+            Assert.assertEquals("LinkedListDeque: ", myLLDeque, ref);
+            Assert.assertEquals("ArrayDeque: ", myADeque, ref);
 
 //            for (int refItem : ref) {
 //                Assert.assertEquals(refItem, myLLDeque[i]);

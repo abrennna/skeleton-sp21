@@ -2,7 +2,7 @@ package deque;
 
 import java.util.Iterator;
 
-public class ArrayDeque<T> implements Deque<T> {
+public class ArrayDeque<T> extends AbstractDeque<T> {
 
     public T[] items;
     public int size;
@@ -144,47 +144,51 @@ public class ArrayDeque<T> implements Deque<T> {
     public class ArrayDequeIterator implements Iterator<T> {
         private int wizPos;
         private ArrayDequeIterator() {
-            wizPos = firstIdx;
+            //wizPos = firstIdx;
+            wizPos = 0;
         }
 
         @Override
         public boolean hasNext() {
-            return wizPos != lastIdx;
+            // return wizPos != lastIdx;
+            return wizPos != size;
         }
 
         @Override
         public T next() {
-            T itemReturn = items[wizPos];
-            while (hasNext()) {
-                wizPos = mod(wizPos + 1);
-            }
+            // T itemReturn = items[wizPos];
+            T itemReturn = items[mod(firstIdx + wizPos)];
+//            if (hasNext()) {
+//                wizPos = mod(wizPos + 1);
+//            }
+            wizPos = mod(wizPos + 1);
             return itemReturn;
         }
     }
 
-    /** Returns whether or not the parameter o is equal to the Deque.
-     * o is considered equal if it is a Deque and if it contains the same contents
-     * (as goverened by the generic T’s equals method) in the same order.
-     * (ADDED 2/12: You’ll need to use the instance of keywords for this.
-     * Read here for more information) */
-    public boolean equals(Object o) {
-        if (o == null) {
-            return false;
-        }
-        if (!(o instanceof Deque)) {
-            return false;
-        }
-        ArrayDeque<T> oDeque =  (ArrayDeque<T>) o;
-        if (this.size != oDeque.size) {
-            return false;
-        }
-        Iterator<T> aDequeSeer = this.iterator();
-        Iterator<T> oSeer = oDeque.iterator();
-        while (aDequeSeer.hasNext()) {
-            if (!aDequeSeer.next().equals(oSeer.next())) {
-                return false;
-            }
-        }
-        return true;
-    }
+//    /** Returns whether or not the parameter o is equal to the Deque.
+//     * o is considered equal if it is a Deque and if it contains the same contents
+//     * (as goverened by the generic T’s equals method) in the same order.
+//     * (ADDED 2/12: You’ll need to use the instance of keywords for this.
+//     * Read here for more information) */
+//    public boolean equals(Object o) {
+//        if (o == null) {
+//            return false;
+//        }
+//        if (!(o instanceof Deque)) {
+//            return false;
+//        }
+//        ArrayDeque<T> oDeque =  (ArrayDeque<T>) o;
+//        if (this.size != oDeque.size) {
+//            return false;
+//        }
+//        Iterator<T> aDequeSeer = this.iterator();
+//        Iterator<T> oSeer = oDeque.iterator();
+//        while (aDequeSeer.hasNext()) {
+//            if (!aDequeSeer.next().equals(oSeer.next())) {
+//                return false;
+//            }
+//        }
+//        return true;
+//    }
 }
